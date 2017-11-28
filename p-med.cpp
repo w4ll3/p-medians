@@ -2,8 +2,11 @@
 #include <cstdlib>
 #include <cstdio>
 #include <limits>
+#include <ctime>
 
 using namespace std;
+
+unsigned int seed = 140596;
 
 class Node {
         int capacity;
@@ -20,8 +23,8 @@ class Node {
 };
 
 Node::Node(void) {
-	this -> capacity = 0;
-	this -> demand = 0;
+	this -> capacity = -1;
+	this -> demand = -1;
 	this -> median = -1;
 }
 
@@ -31,37 +34,29 @@ void Node::setValues(int capacity, int demand) {
 }
 
 int Node::getCapacity(void) {
-	return capacity;
+	return this -> capacity;
 }
 
 int Node::getDemand(void) {
-	return demand;
+	return this -> demand;
 }
 
 int Node::getMedian(void) {
-	return median;
+	return this -> median;
 }
-	
 
 int main(int argc, char *argv[]) {
         int size, vertex, result, median, i, j, cap, dem;
+	srand(seed);
         cin >> size;
         cin >> median;
         cin >> vertex;
         cin >> result;
-        Node graph[size][size];
+        Node nodesMap[size][size];
+	Node medians[median];
         while(!cin.eof()) {
                 cin >> i >> j >> cap >> dem;
-		graph[i][j].setValues(cap, dem);
+		nodesMap[i][j].setValues(cap, dem);
         }
-	int greaterCap = -numeric_limits<int>::infinity();
-	for(i = 0; i < vertex; i++) {
-		for(j; ((size / vertex) % j) != 0; j++) {
-			if((cap = graph[i][j].getCapacity()) > greaterCap) greaterCap = cap;
-		}
-		j++;
-		cout << "its me mario" << endl;
-		cout << greaterCap << endl;
-	}
         return 0;
 }
